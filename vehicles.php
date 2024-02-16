@@ -1,28 +1,29 @@
-<?php 
-    $conn = new mysqli('localhost', 'root', '', 'vio');
-    if (!$conn) {
-      die("Failed to connect to MYSQLi" . $conn->connct_error);
-    } 
+<?php
+$conn = new mysqli('localhost', 'root', '', 'vio');
+if (!$conn) {
+  die("Failed to connect to MYSQLi" . $conn->connct_error);
+}
 
-    $sql = "select * from vehicles";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $results = $stmt->get_result();
-    $records = $results->fetch_all(MYSQLI_ASSOC);
-
-
+$sql = "select * from vehicles";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$results = $stmt->get_result();
+$records = $results->fetch_all(MYSQLI_ASSOC);
 
 
-    //   $sql = "SELECT DISTINCT location FROM solar_installations ORDER BY location ASC; ";
-    //   $stmt = $conn->prepare($sql);
-    //   $stmt->execute();
-    //   $results = $stmt->get_result();
-    //   $locations = $results->fetch_all(MYSQLI_ASSOC);
+
+
+//   $sql = "SELECT DISTINCT location FROM solar_installations ORDER BY location ASC; ";
+//   $stmt = $conn->prepare($sql);
+//   $stmt->execute();
+//   $results = $stmt->get_result();
+//   $locations = $results->fetch_all(MYSQLI_ASSOC);
 ?>
 
 
 
 <?php include './inc/header.php' ?>
+
 <body class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="white" data-active-color="danger">
@@ -43,33 +44,33 @@
       <div class="sidebar-wrapper">
         <ul class="nav">
 
-    
-        <li class="">
-        <a href="./user">
-            <i class="nc-icon nc-single-02"></i>
-            <p>Add Solar Record</p>
-        </a>
-    </li>
-    <li class="">
-        <a href="./solars">
-            <i class="nc-icon nc-tile-56"></i>
-            <p>Solar Records</p>
-        </a>
-    </li>
-    <li class="">
-      <a href="./add-vehicle-record">
-        <i class="nc-icon nc-tile-56"></i>
-        <p>Add Vehicle Records</p>
-      </a>
-    </li>
-    <li class="active">
-        <a href="./vehicles">
-            <i class="nc-icon nc-single-02"></i>
-            <p>Vehicle Records</p>
-        </a>
-    </li>
 
-    <!-- <?php foreach($locations as $location) :?>
+          <li class="">
+            <a href="./user">
+              <i class="nc-icon nc-single-02"></i>
+              <p>Add Solar Record</p>
+            </a>
+          </li>
+          <li class="">
+            <a href="./solars">
+              <i class="nc-icon nc-tile-56"></i>
+              <p>Solar Records</p>
+            </a>
+          </li>
+          <li class="">
+            <a href="./add-vehicle-record">
+              <i class="nc-icon nc-tile-56"></i>
+              <p>Add Vehicle Records</p>
+            </a>
+          </li>
+          <li class="active">
+            <a href="./vehicles">
+              <i class="nc-icon nc-single-02"></i>
+              <p>Vehicle Records</p>
+            </a>
+          </li>
+
+          <!-- <?php foreach ($locations as $location) : ?>
       <?php extract($location) ?>
       <li >
           <a href="./card?location=<?= $location ?>">
@@ -78,7 +79,7 @@
           </a>
       </li>
     <?php endforeach; ?> -->
-          
+
         </ul>
       </div>
     </div>
@@ -105,7 +106,7 @@
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
             <form>
               <div class="input-group no-border">
-                <input onkeyup="myFunction()" type="text" id="search"  class="form-control" placeholder="Search...">
+                <input onkeyup="myFunction()" type="text" id="search" class="form-control" placeholder="Search...">
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <i class="nc-icon nc-zoom-split"></i>
@@ -146,7 +147,7 @@
             </ul>
           </div>
         </div>
-      </nav>      <!-- End Navbar -->
+      </nav> <!-- End Navbar -->
 
 
       <div class="content">
@@ -165,31 +166,31 @@
                       <th class="th-sm text-secondary">Vehicle Type</th>
                       <th class="th-sm text-secondary">Vehicle Chasis No. </th>
                       <th class="th-sm text-secondary">Location </th>
-                      
-                      <th class="th-sm text-secondary">Date</th>
+
+                      <!-- <th class="th-sm text-secondary">Date</th>
                       <th class="th-sm text-secondary">Service Rendered</th>
                       <th class="th-sm text-secondary">H. MTCE's Attestation</th>
                       <th class="th-sm text-secondary">Driver's Attestation</th>
-                      <th class="th-sm text-secondary">Remarks</th>
+                      <th class="th-sm text-secondary">Remarks</th> -->
                     </thead>
                     <tbody>
                       <?php foreach ($records as $record) : ?>
                         <?php extract($record) ?>
                         <tr>
-                          <td><?= $id?></td>
-                          <td><?= $vin ?></td>
+                          <td><?= $id ?></td>
+                          <td><?= "<a href='vehicle?vin=$vin'>$vin</a>" ?></td>
                           <td><?= $vehicle_type ?></td>
                           <td><?= $vehicle_chassis_no ?></td>
                           <td><?= $location ?></td>
-                          <td><?= $date ?></td>
+                          <!-- <td><?= $date ?></td>
                           <td><?= $service_rendered ?></td>
                           <td><?= 'Yes' ?></td>
                           <td><?= 'Yes' ?></td>
-                          
-                          <!-- <td><?= $MTCE_Attestation == 'yes' ? 'Approved' : 'Not Approved'?></td>
+                           -->
+                          <!-- <td><?= $MTCE_Attestation == 'yes' ? 'Approved' : 'Not Approved' ?></td>
                           <td><?= $drivers_attestation == "" ? "Awaiting Approval" : 'Approved' ?></td> -->
                           <td><?= $remarks ?></td>
-                          
+
 
                           <td>
                             <a href="v-card?vin=<?= $vin; ?>&id=<?= $id ?>" type="button" rel="tooltip" class="btn btn-small btn-success">
@@ -217,28 +218,30 @@
       </div>
 
       <footer class="footer footer-black  footer-white ">
-  <div class="container-fluid">
-    <div class="row">
-      <nav class="footer-nav">
-        <ul>
-          <li><a href="javascript:void(0)" >Developer Sam - 08112823412</a></li>
-          <li><a href="javascript:void(0)" >Blog</a></li>
-          <li><a href="javascript:void(0)" >Contact Me</a></li>
-        </ul>
-      </nav>
-      <div class="credits ml-auto">
-        <span class="copyright">
-          <span>&copy;</span> <script>
-            document.write(new Date().getFullYear())
-          </script>, made with <i class="fa fa-heart heart"></i> by Samuel Ehimen
-        </span>
-      </div>
+        <div class="container-fluid">
+          <div class="row">
+            <nav class="footer-nav">
+              <ul>
+                <li><a href="javascript:void(0)">Developer Sam - 08112823412</a></li>
+                <li><a href="javascript:void(0)">Blog</a></li>
+                <li><a href="javascript:void(0)">Contact Me</a></li>
+              </ul>
+            </nav>
+            <div class="credits ml-auto">
+              <span class="copyright">
+                <span>&copy;</span>
+                <script>
+                  document.write(new Date().getFullYear())
+                </script>, made with <i class="fa fa-heart heart"></i> by Samuel Ehimen
+              </span>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   </div>
-</footer>    </div>
-  </div>
 
-  <?php include './inc/scripts.php'?>
+  <?php include './inc/scripts.php' ?>
 
 
 
