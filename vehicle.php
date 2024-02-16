@@ -1,3 +1,19 @@
+<?php
+require_once './config/DB.php';
+
+$db = new DB();
+$vin = $db->sanitize($_GET['vin']);
+$tableName = $vin . "_records";
+$sql = "select * from $tableName";
+$res = $db->conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+$results = $db->conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+// echo "<pre>";
+// print_r($results);
+// echo "</pre>";
+
+?>
+
+
 <?php include './inc/header.php' ?>
 
 <body class="">
@@ -6,7 +22,7 @@
             <div class="logo">
                 <a href="#" class="simple-text logo-mini">
                     <div class="logo-image-small">
-                    <img src="./assets/img/vio.png">
+                        <img src="./assets/img/vio.png">
                     </div>
                     <!-- <p>CT</p> -->
                 </a>
@@ -137,30 +153,55 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table">
-                                        <thead class="text-primary">
-                                            <th class="th-sm">Date</th>
-                                            <th class="th-sm">Service Rendered</th>
-                                            <th class="">H MTCE Attestation</th>
-                                            <th class="">Driver's Attestation</th>
-                                            <th class="">Grade</th>
-                                            <th class=""></th>
-                                            <th class=""></th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>No Records for <?= $_GET['vin'] ?></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>
-                                                    <a href="view.php?vin=<?= $_GET['vin'] ?>" type="button" rel="tooltip" class="btn btn-small btn-warning">
-                                                        <span>Add Record</span>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                        <?php if (count($results) == 0) : ?>
+                                            <thead class="text-primary">
+                                                <th class="th-sm">Date</th>
+                                                <th class="th-sm">Service Rendered</th>
+                                                <th class="">H MTCE Attestation</th>
+                                                <th class="">Driver's Attestation</th>
+                                                <th class="">Grade</th>
+                                                <th class=""></th>
+                                                <th class=""></th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>No Records for <?= $_GET['vin'] ?></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <a href="view.php?vin=<?= $_GET['vin'] ?>" type="button" rel="tooltip" class="btn btn-small btn-warning">
+                                                            <span>Add Record</span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+
+                                        <?php else : ?>
+                                            <thead class="text-primary">
+                                                <th class="th-sm">Date</th>
+                                                <th class="th-sm">Service Rendered</th>
+                                                <th class="">H MTCE Attestation</th>
+                                                <th class="">Driver's Attestation</th>
+                                                <th class="">Grade</th>
+                                                <th class=""></th>
+                                                <th class=""></th>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach($results as $result): ?>
+                                                    <?php extract($result); ?>
+                                                    <tr>
+                                                        <td><?= $date ?></td>
+                                                        <td><?= $service_rendered ?></td>
+                                                        <td><?= $h_mtce_attestation ?></td>
+                                                        <td><?= $driver_attestation ?></td>
+                                                        <td><?= $remarks ?></td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        <?php endif; ?>
 
 
 
