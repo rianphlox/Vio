@@ -1,21 +1,24 @@
 <?php
-    $conn = new mysqli('localhost', 'root', '', 'vio') or die("Failed to connect to Mysqli" . $conn->connect_error);
-    
-    $id = $_GET['id'];
-    $vin =  $_GET['vin'];
+    // $conn = new mysqli('localhost', 'root', '', 'vio') or die("Failed to connect to Mysqli" . $conn->connect_error);
+
+    require_once './config/DB.php';
+    $db = new DB();
+
+    $id = $db->sanitize($_GET['id']);
+    $vin =  $db->sanitize($_GET['vin']);
 
     $sql =  "select * from vehicles where id = $id";
-    $results = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+    $results = $db->conn->query($sql)->fetch_all(MYSQLI_ASSOC);
     
 
     $table_name = strtolower($vin . "_records");
     $sql = "select * from $table_name" ;
-    $v_results = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+    $v_results = $db->conn->query($sql)->fetch_all(MYSQLI_ASSOC);
     // echo "$table_name <pre>";
     // print_r($v_results);
     // echo "</pre>";
 
-    $conn->close();
+    $db->conn->close();
 ?>
 
 

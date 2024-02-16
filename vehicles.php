@@ -199,9 +199,9 @@ $records = $results->fetch_all(MYSQLI_ASSOC);
                             </a>
                           </td>
                           <td>
-                            <a href="delete.php?id=<?= $id; ?>&p=<?= basename($_SERVER['PHP_SELF']) ?>" type="button" rel="tooltip" class="btn btn-small btn-danger">
+                            <a href="delete.php?id=<?= $id; ?>&p=<?= basename($_SERVER['PHP_SELF']) ?>" type="button" rel="tooltip" class="btn btn-small btn-info">
                               <!-- <i class="material-icons">edit</i> -->
-                              <span>Delete</span>
+                              <span>Add Record</span>
                             </a>
                           </td>
 

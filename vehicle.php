@@ -159,7 +159,7 @@ $results = $db->conn->query($sql)->fetch_all(MYSQLI_ASSOC);
                                                 <th class="th-sm">Service Rendered</th>
                                                 <th class="">H MTCE Attestation</th>
                                                 <th class="">Driver's Attestation</th>
-                                                <th class="">Grade</th>
+                                                <th class="">Remarks</th>
                                                 <th class=""></th>
                                                 <th class=""></th>
                                             </thead>
@@ -171,11 +171,11 @@ $results = $db->conn->query($sql)->fetch_all(MYSQLI_ASSOC);
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
-                                                    <td>
+                                                    <!-- <td>
                                                         <a href="view.php?vin=<?= $_GET['vin'] ?>" type="button" rel="tooltip" class="btn btn-small btn-warning">
                                                             <span>Add Record</span>
                                                         </a>
-                                                    </td>
+                                                    </td> -->
                                                 </tr>
                                             </tbody>
 
@@ -185,9 +185,9 @@ $results = $db->conn->query($sql)->fetch_all(MYSQLI_ASSOC);
                                                 <th class="th-sm">Service Rendered</th>
                                                 <th class="">H MTCE Attestation</th>
                                                 <th class="">Driver's Attestation</th>
-                                                <th class="">Grade</th>
-                                                <th class=""></th>
-                                                <th class=""></th>
+                                                <th class="">Remarks</th>
+                                                <!-- <th class=""></th>
+                                                <th class=""></th> -->
                                             </thead>
                                             <tbody>
                                                 <?php foreach($results as $result): ?>
