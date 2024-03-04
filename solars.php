@@ -162,14 +162,14 @@
                     <thead class=" text-primary">
                       <th class="th-sm text-secondary">id</th>
                       <th class="th-sm text-secondary">Location</th>
-                      <th class="th-sm text-secondary">Capacity</th>
+                      <th class="th-sm text-secondary">Capacity of Inverter</th>
+                      <th class="th-sm text-secondary">Battery Type</th>
                       <th class="th-sm text-secondary">No. of Batteries</th>
                       <th class="th-sm text-secondary">No. of Panels</th>
                       <th class="th-sm text-secondary">No. of Standalone Street Lights</th>
                       <th class="th-sm text-secondary">Date</th>
                       <th class="th-sm text-secondary">Service Rendered</th>
-                      <th class="th-sm text-secondary">Service Rendered</th>
-                      <th class="th-sm text-secondary">MTCE_Attestation</th>
+                      <th class="th-sm text-secondary">(H) MTCE's Attestation</th>
                       <th class="th-sm text-secondary">TACS Attestation</th>
                       <th class="th-sm text-secondary">Remarks</th>
                     </thead>
@@ -180,7 +180,7 @@
                           <td><?= $id?></td>
                           <td><?= $location ?></td>
                           <td><?= $capacity ?></td>
-                          <td><?= $capacity ?></td>
+                          <td><?= $battery_type ?></td>
                           <td><?= $no_of_batteries ?></td>
                           <td><?= $no_of_panels ?></td>
                           <td><?= $no_of_st_lights ?></td>
@@ -192,10 +192,19 @@
                           
 
                           <td>
-                            <a href="edit.php?id=<?= $id; ?>" type="button" rel="tooltip" class="btn btn-small btn-success">
-                              <!-- <i class="material-icons">edit</i> -->
-                              <span>Edit</span>
-                            </a>
+                            <?php if ($MTCE_Attestation != "yes"): ?>
+                              <a href="s_approve.php?id=<?= $id; ?>" type="button" rel="tooltip" class="btn btn-small btn-success">
+                                <!-- <i class="material-icons">edit</i> -->
+                                <span>Approve</span>
+                              </a>
+                              
+                              <?php else: ?>
+                                <a href="s_approve.php?id=<?= $id; ?>" type="button" rel="tooltip" class="btn btn-small btn-success">
+                                  <!-- <i class="material-icons">edit</i> -->
+                                  <span>Approved</span>
+                                </a>
+
+                            <?php endif ?>
                           </td>
                           <td>
                             <a href="delete.php?id=<?= $id; ?>&p=<?= basename($_SERVER['PHP_SELF']) ?>" type="button" rel="tooltip" class="btn btn-small btn-danger">
